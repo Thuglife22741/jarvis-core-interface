@@ -1,0 +1,103 @@
+import { motion } from "framer-motion";
+import { useMemo } from "react";
+
+const AudioVisualizer = () => {
+  const bars = useMemo(() => {
+    const leftBars = [];
+    const rightBars = [];
+    
+    // Generate bars for left side
+    for (let i = 0; i < 25; i++) {
+      const distance = i;
+      const maxHeight = Math.max(20, 80 - distance * 2);
+      leftBars.push({
+        id: `left-${i}`,
+        height: maxHeight,
+        delay: i * 0.05,
+        x: -50 - i * 8,
+      });
+    }
+    
+    // Generate bars for right side
+    for (let i = 0; i < 25; i++) {
+      const distance = i;
+      const maxHeight = Math.max(20, 80 - distance * 2);
+      rightBars.push({
+        id: `right-${i}`,
+        height: maxHeight,
+        delay: i * 0.05,
+        x: 50 + i * 8,
+      });
+    }
+    
+    return { leftBars, rightBars };
+  }, []);
+
+  return (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      {/* Left side bars */}
+      {bars.leftBars.map((bar) => (
+        <motion.div
+          key={bar.id}
+          className="absolute w-1"
+          style={{
+            left: `calc(50% + ${bar.x}px)`,
+            background: "linear-gradient(to top, hsl(195 100% 50% / 0.8), hsl(195 100% 50% / 0.3))",
+            borderRadius: "2px",
+          }}
+          animate={{
+            height: [bar.height * 0.3, bar.height, bar.height * 0.5, bar.height * 0.8, bar.height * 0.3],
+          }}
+          transition={{
+            duration: 0.8 + Math.random() * 0.4,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: bar.delay,
+          }}
+        />
+      ))}
+
+      {/* Right side bars */}
+      {bars.rightBars.map((bar) => (
+        <motion.div
+          key={bar.id}
+          className="absolute w-1"
+          style={{
+            left: `calc(50% + ${bar.x}px)`,
+            background: "linear-gradient(to top, hsl(195 100% 50% / 0.8), hsl(195 100% 50% / 0.3))",
+            borderRadius: "2px",
+          }}
+          animate={{
+            height: [bar.height * 0.3, bar.height, bar.height * 0.5, bar.height * 0.8, bar.height * 0.3],
+          }}
+          transition={{
+            duration: 0.8 + Math.random() * 0.4,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: bar.delay,
+          }}
+        />
+      ))}
+
+      {/* Horizontal crosshair lines */}
+      <div className="absolute w-full flex items-center justify-center">
+        <motion.div
+          className="absolute h-px w-16"
+          style={{
+            left: "calc(50% + 250px)",
+            background: "linear-gradient(to right, hsl(195 100% 50% / 0.5), transparent)",
+          }}
+        />
+        <motion.div
+          className="absolute h-px w-16"
+          style={{
+            right: "calc(50% + 250px)",
+            background: "linear-gradient(to left, hsl(195 100% 50% / 0.5), transparent)",
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default AudioVisualizer;
