@@ -4,6 +4,7 @@ import JarvisCore from "@/components/JarvisCore";
 import AudioVisualizer from "@/components/AudioVisualizer";
 import OrbitalRing from "@/components/OrbitalRing";
 import TechLabels from "@/components/TechLabels";
+import ElevenLabsWidget from "@/components/ElevenLabsWidget";
 import { ElevenLabsProvider } from "@/contexts/ElevenLabsContext";
 
 const Index = () => {
@@ -30,6 +31,9 @@ const Index = () => {
           {/* Technical labels */}
           <TechLabels />
         </main>
+
+        {/* ElevenLabs Widget - appears in bottom right corner */}
+        <ElevenLabsWidget />
       </div>
     </ElevenLabsProvider>
   );
