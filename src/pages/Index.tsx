@@ -4,7 +4,6 @@ import JarvisCore from "@/components/JarvisCore";
 import AudioVisualizer from "@/components/AudioVisualizer";
 import OrbitalRing from "@/components/OrbitalRing";
 import TechLabels from "@/components/TechLabels";
-import TalkButton from "@/components/TalkButton";
 
 const Index = () => {
   return (
@@ -29,9 +28,6 @@ const Index = () => {
         {/* Technical labels */}
         <TechLabels />
       </main>
-
-      {/* Talk button */}
-      <TalkButton />
     </div>
   );
 };
