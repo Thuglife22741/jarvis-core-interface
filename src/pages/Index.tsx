@@ -4,31 +4,34 @@ import JarvisCore from "@/components/JarvisCore";
 import AudioVisualizer from "@/components/AudioVisualizer";
 import OrbitalRing from "@/components/OrbitalRing";
 import TechLabels from "@/components/TechLabels";
+import { ElevenLabsProvider } from "@/contexts/ElevenLabsContext";
 
 const Index = () => {
   return (
-    <div className="relative min-h-screen w-full bg-background overflow-hidden">
-      {/* Background grid */}
-      <GridBackground />
+    <ElevenLabsProvider>
+      <div className="relative min-h-screen w-full bg-background overflow-hidden">
+        {/* Background grid */}
+        <GridBackground />
 
-      {/* Header */}
-      <JarvisHeader />
+        {/* Header */}
+        <JarvisHeader />
 
-      {/* Main content - centered */}
-      <main className="relative flex items-center justify-center min-h-screen">
-        {/* Orbital rings and particles */}
-        <OrbitalRing />
+        {/* Main content - centered */}
+        <main className="relative flex items-center justify-center min-h-screen">
+          {/* Orbital rings and particles */}
+          <OrbitalRing />
 
-        {/* Audio visualizer */}
-        <AudioVisualizer />
+          {/* Audio visualizer */}
+          <AudioVisualizer />
 
-        {/* Central core */}
-        <JarvisCore />
+          {/* Central core */}
+          <JarvisCore />
 
-        {/* Technical labels */}
-        <TechLabels />
-      </main>
-    </div>
+          {/* Technical labels */}
+          <TechLabels />
+        </main>
+      </div>
+    </ElevenLabsProvider>
   );
 };
 
