@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { useMemo } from "react";
+import { useElevenLabs } from "@/contexts/ElevenLabsContext";
 
 const AudioVisualizer = () => {
+  const { status, isSpeaking } = useElevenLabs();
+  const isActive = status === "connected";
   const bars = useMemo(() => {
     const leftBars = [];
     const rightBars = [];
@@ -42,14 +45,20 @@ const AudioVisualizer = () => {
           className="absolute w-1"
           style={{
             left: `calc(50% + ${bar.x}px)`,
-            background: "linear-gradient(to top, hsl(195 100% 50% / 0.8), hsl(195 100% 50% / 0.3))",
+            background: isActive 
+              ? "linear-gradient(to top, hsl(120 100% 50% / 0.9), hsl(120 100% 50% / 0.4))"
+              : "linear-gradient(to top, hsl(195 100% 50% / 0.8), hsl(195 100% 50% / 0.3))",
             borderRadius: "2px",
+            boxShadow: isActive ? "0 0 10px hsl(120 100% 50% / 0.5)" : undefined,
           }}
           animate={{
-            height: [bar.height * 0.3, bar.height, bar.height * 0.5, bar.height * 0.8, bar.height * 0.3],
+            height: isActive 
+              ? [bar.height * 0.5, bar.height * 1.3, bar.height * 0.7, bar.height * 1.1, bar.height * 0.5]
+              : [bar.height * 0.3, bar.height, bar.height * 0.5, bar.height * 0.8, bar.height * 0.3],
+            opacity: isSpeaking ? [0.8, 1, 0.9, 1, 0.8] : 1,
           }}
           transition={{
-            duration: 0.8 + Math.random() * 0.4,
+            duration: isActive ? 0.4 + Math.random() * 0.2 : 0.8 + Math.random() * 0.4,
             repeat: Infinity,
             ease: "easeInOut",
             delay: bar.delay,
@@ -64,14 +73,20 @@ const AudioVisualizer = () => {
           className="absolute w-1"
           style={{
             left: `calc(50% + ${bar.x}px)`,
-            background: "linear-gradient(to top, hsl(195 100% 50% / 0.8), hsl(195 100% 50% / 0.3))",
+            background: isActive 
+              ? "linear-gradient(to top, hsl(120 100% 50% / 0.9), hsl(120 100% 50% / 0.4))"
+              : "linear-gradient(to top, hsl(195 100% 50% / 0.8), hsl(195 100% 50% / 0.3))",
             borderRadius: "2px",
+            boxShadow: isActive ? "0 0 10px hsl(120 100% 50% / 0.5)" : undefined,
           }}
           animate={{
-            height: [bar.height * 0.3, bar.height, bar.height * 0.5, bar.height * 0.8, bar.height * 0.3],
+            height: isActive 
+              ? [bar.height * 0.5, bar.height * 1.3, bar.height * 0.7, bar.height * 1.1, bar.height * 0.5]
+              : [bar.height * 0.3, bar.height, bar.height * 0.5, bar.height * 0.8, bar.height * 0.3],
+            opacity: isSpeaking ? [0.8, 1, 0.9, 1, 0.8] : 1,
           }}
           transition={{
-            duration: 0.8 + Math.random() * 0.4,
+            duration: isActive ? 0.4 + Math.random() * 0.2 : 0.8 + Math.random() * 0.4,
             repeat: Infinity,
             ease: "easeInOut",
             delay: bar.delay,
